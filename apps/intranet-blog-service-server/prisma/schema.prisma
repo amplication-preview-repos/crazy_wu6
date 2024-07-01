@@ -1,0 +1,70 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model News {
+  createdAt    DateTime @default(now())
+  description1 String?
+  description2 String?
+  id           String   @id @default(cuid())
+  postedBy     String?
+  title        String?
+  updatedAt    DateTime @updatedAt
+}
+
+model SocialPost {
+  createdAt        DateTime @default(now())
+  id               String   @id @default(cuid())
+  image            Json?
+  shortDescription String?
+  title            String?
+  updatedAt        DateTime @updatedAt
+}
+
+model PhotoGallery {
+  createdAt       DateTime @default(now())
+  description     String?
+  id              String   @id @default(cuid())
+  photosAndVideos Json?
+  title           String?
+  updatedAt       DateTime @updatedAt
+}
+
+model Event {
+  banner      Json?
+  category    String?
+  createdAt   DateTime  @default(now())
+  description String?
+  endDate     DateTime?
+  id          String    @id @default(cuid())
+  location    String?
+  startDate   DateTime?
+  title       String?
+  updatedAt   DateTime  @updatedAt
+}
+
+model QuickLink {
+  backgroundColor String?
+  createdAt       DateTime @default(now())
+  id              String   @id @default(cuid())
+  text            String?
+  updatedAt       DateTime @updatedAt
+  url             String?
+}
+
+model User {
+  createdAt DateTime @default(now())
+  email     String?  @unique
+  firstName String?
+  id        String   @id @default(cuid())
+  lastName  String?
+  password  String
+  roles     Json
+  updatedAt DateTime @updatedAt
+  username  String   @unique
+}
